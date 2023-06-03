@@ -12,5 +12,6 @@
       "database": "test",
       "username": "vscode"
     }
-  ]
+  ],
+  "java.debug.settings.onBuildFailureProceed": true
 }

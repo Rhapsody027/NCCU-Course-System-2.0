@@ -11,28 +11,27 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nccu.PrimaryController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
             <ImageView fitHeight="673.0" fitWidth="1181.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Main.jpg" />
+                  <Image url="@home.jpg" />
                </image>
             </ImageView>
-            <Button layoutX="374.0" layoutY="14.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="59.0" style="-fx-background-color: #ffffff;" text="Search" textFill="#447b9c" />
             <RadioButton id="select_att" layoutX="33.0" layoutY="200.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" text="不用點名">
                <font>
                   <Font size="16.0" />
                </font></RadioButton>
-            <TextField id="search_bar" layoutX="33.0" layoutY="49.0" prefHeight="38.0" prefWidth="330.0">
+            <TextField id="search_bar" layoutX="33.0" layoutY="48.0" prefHeight="38.0" prefWidth="330.0">
                <font>
                   <Font size="20.0" />
                </font></TextField>
             <TextArea id="search_info" editable="false" layoutX="32.0" layoutY="283.0" prefHeight="352.0" prefWidth="394.0" />
             <TextArea id="course_info" editable="false" layoutX="532.0" layoutY="70.0" prefHeight="286.0" prefWidth="496.0" />
-            <ChoiceBox id="select_type" layoutX="216.0" layoutY="130.0" prefHeight="23.0" prefWidth="196.0" />
-            <Button id="btn_check" layoutX="1036.0" layoutY="234.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="82.0" text="check">
+            <ChoiceBox id="select_type" layoutX="230.0" layoutY="121.0" prefHeight="38.0" prefWidth="193.0" />
+            <Button id="btn_add" layoutX="1036.0" layoutY="234.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="82.0" text="add">
                <font>
                   <Font size="20.0" />
                </font>
@@ -53,17 +52,23 @@
                   <Font size="16.0" />
                </font>
             </RadioButton>
-            <ChoiceBox id="select_day" layoutX="105.0" layoutY="130.0" prefHeight="23.0" prefWidth="76.0" />
-            <Button id="btn_search" layoutX="374.0" layoutY="49.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="46.0" text="search">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </Button>
+            <ChoiceBox id="select_day" layoutX="116.0" layoutY="121.0" prefHeight="38.0" prefWidth="95.0" />
             <TextField id="search_bar" layoutX="532.0" layoutY="603.0" prefHeight="38.0" prefWidth="496.0">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
+            <Button id="btn_check" layoutX="1036.0" layoutY="130.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="82.0" text="check">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <ChoiceBox id="select_day" layoutX="32.0" layoutY="121.0" prefHeight="38.0" prefWidth="66.0" />
+            <Button id="btn_check" fx:id="btn_search" layoutX="374.0" layoutY="44.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="52.0" text="search">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
       </children>
     </AnchorPane>
   </children>

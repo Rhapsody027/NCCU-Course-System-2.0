@@ -15,7 +15,6 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("home"));
         stage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("btn_search.css").toExternalForm());
         stage.show();
     }
 

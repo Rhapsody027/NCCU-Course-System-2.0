@@ -1,7 +1,9 @@
 module nccu {
-    requires javafx.controls;
-    requires javafx.fxml;
+    requires transitive javafx.controls;
+    requires transitive javafx.fxml;
+    requires transitive java.sql;
 
     opens nccu to javafx.fxml;
+
     exports nccu;
 }

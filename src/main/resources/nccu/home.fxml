@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nccu.HomeController">
   <children>
@@ -30,7 +31,6 @@
                <font>
                   <Font size="20.0" />
                </font></TextField>
-            <TextArea id="course_info" editable="false" layoutX="532.0" layoutY="70.0" prefHeight="286.0" prefWidth="496.0" />
             <ChoiceBox id="select_type" layoutX="230.0" layoutY="121.0" prefHeight="38.0" prefWidth="193.0" />
             <Button id="btn_add" layoutX="1036.0" layoutY="234.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="82.0" text="add">
                <font>
@@ -65,12 +65,7 @@
                </font>
             </Button>
             <ChoiceBox id="select_day" layoutX="32.0" layoutY="121.0" prefHeight="38.0" prefWidth="66.0" />
-            <Button id="btn_check" fx:id="btn_search" layoutX="374.0" layoutY="44.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="52.0" text="search">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Button>
-            <TableView fx:id="search_table" fixedCellSize="50.0" layoutX="32.0" layoutY="282.0" prefHeight="346.0" prefWidth="390.0">
+            <TableView fx:id="search_table" fixedCellSize="50.0" layoutX="32.0" layoutY="282.0" onMouseClicked="#tableClick" prefHeight="346.0" prefWidth="390.0">
               <columns>
                 <TableColumn fx:id="name" prefWidth="196.8000144958496" text="課程名稱" />
                 <TableColumn fx:id="time" minWidth="4.800018310546875" prefWidth="119.19996643066406" style="-fx-alignment: BASELINE_CENTER;" text="時間" />
@@ -80,6 +75,7 @@
                   <TableColumn fx:id="att" prefWidth="64.79996337890623" text="點名" />
               </columns>
             </TableView>
+            <WebView fx:id="webView" layoutX="532.0" layoutY="70.0" prefHeight="286.0" prefWidth="496.0" />
       </children>
     </AnchorPane>
   </children>

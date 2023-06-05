@@ -3,8 +3,6 @@ package nccu;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
-
-import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -14,6 +12,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 public class HomeController implements Initializable {
 
@@ -40,6 +41,10 @@ public class HomeController implements Initializable {
 
     @FXML
     private TextField txt_search;
+
+    @FXML
+    private WebView webView;
+    private WebEngine engine;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -78,6 +83,10 @@ public class HomeController implements Initializable {
                 });
             });
 
+            // init webView
+            engine = webView.getEngine();
+            loadPage();
+
             SortedList<Course> sortedList = new SortedList<>(filteredList);
             sortedList.comparatorProperty().bind(search_table.comparatorProperty());
             search_table.setItems(sortedList);
@@ -95,5 +104,21 @@ public class HomeController implements Initializable {
                     search_table.getSelectionModel().select(item);
                     search_table.scrollTo(item);
                 });
+    }
+
+    @FXML
+    void tableClick(MouseEvent event) {
+    }
+
+    public void loadPage() {
+        String url = "https://newdoc.nccu.edu.tw/teaschm/";
+        String semester = "1112/schmPrv.jsp-yy=111&smt=2&";
+        String courseID = "num=031004&gop=02&s=1.html";
+        engine.load(url + semester + courseID);
+        try {
+            engine.load("https://qrysub.nccu.edu.tw");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -5,25 +5,48 @@
     <artifactId>demo</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
+        <jxbrowser.version>7.32</jxbrowser.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
+    <repositories>
+        <repository>
+            <id>com.teamdev</id>
+            <url>https://europe-maven.pkg.dev/jxbrowser/releases</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>13</version>
+            <version>19</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>19</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>13</version>
+            <version>19</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
+        </dependency>
+        <dependency>
+            <groupId>com.teamdev.jxbrowser</groupId>
+            <artifactId>jxbrowser-win64</artifactId>
+            <version>7.12.2</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>com.teamdev.jxbrowser</groupId>
+            <artifactId>jxbrowser-javafx</artifactId>
+            <version>7.12.2</version>
         </dependency>
     </dependencies>
     <build>

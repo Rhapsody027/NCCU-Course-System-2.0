@@ -12,32 +12,41 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class HomeController implements Initializable {
-    @FXML
-    private TableView<test> search_table;
 
     @FXML
-    private TableColumn<test, String> name;
+    private TableColumn<Course, String> att;
 
     @FXML
-    private TableColumn<test, String> pro;
+    private TableColumn<Course, Integer> cool;
 
     @FXML
-    private TableColumn<test, String> time;
+    private TableColumn<Course, String> name;
 
     @FXML
-    private TableColumn<test, String> tag;
+    private TableColumn<Course, String> pro;
+
+    @FXML
+    private TableView<Course> search_table;
+
+    @FXML
+    private TableColumn<Course, Integer> sweet;
+
+    @FXML
+    private TableColumn<Course, String> time;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        name.setCellValueFactory(new PropertyValueFactory<test, String>("name"));
-        pro.setCellValueFactory(new PropertyValueFactory<test, String>("pro"));
-        time.setCellValueFactory(new PropertyValueFactory<test, String>("time"));
-        tag.setCellValueFactory(new PropertyValueFactory<test, String>("tag"));
+        name.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
+        time.setCellValueFactory(new PropertyValueFactory<Course, String>("time"));
+        pro.setCellValueFactory(new PropertyValueFactory<Course, String>("pro"));
+        sweet.setCellValueFactory(new PropertyValueFactory<Course, Integer>("sweet"));
+        cool.setCellValueFactory(new PropertyValueFactory<Course, Integer>("cool"));
+        att.setCellValueFactory(new PropertyValueFactory<Course, String>("att"));
 
         try {
-            ObservableList<test> list = DBConnect.getData();
+            ObservableList<Course> list = DBConnect.getData();
             search_table.setItems(list);
-            System.out.println("Hiiii");
+            System.out.println("Import!");
 
         } catch (SQLException e) {
             e.printStackTrace();

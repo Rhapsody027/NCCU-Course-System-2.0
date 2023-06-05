@@ -4,7 +4,7 @@ public class Course {
     int sweet, cool;
     String name, pro, time, att;
 
-    public Course(int sweet, int cool, String name, String pro, String time, String att) {
+    public Course(String name, String time, String pro, int sweet, int cool, String att) {
         this.sweet = sweet;
         this.cool = cool;
         this.name = name;

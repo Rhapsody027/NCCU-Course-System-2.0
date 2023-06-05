@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nccu.HomeController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nccu.HomeController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -22,7 +22,7 @@
                   <Image url="@home.jpg" />
                </image>
             </ImageView>
-            <RadioButton id="select_att" layoutX="33.0" layoutY="200.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" text="不用點名">
+            <RadioButton id="select_att" layoutX="323.0" layoutY="200.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" text="不用點名">
                <font>
                   <Font size="16.0" />
                </font></RadioButton>
@@ -43,12 +43,12 @@
                   <Font size="17.0" />
                </font>
             </Button>
-            <RadioButton id="select_sweet" layoutX="177.0" layoutY="200.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" text="甜到蛀牙">
+            <RadioButton id="select_sweet" layoutX="32.0" layoutY="200.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" text="甜到蛀牙">
                <font>
                   <Font size="16.0" />
                </font>
             </RadioButton>
-            <RadioButton id="select_chill" layoutX="322.0" layoutY="200.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" text="涼到發抖">
+            <RadioButton id="select_chill" layoutX="176.0" layoutY="200.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" text="涼到發抖">
                <font>
                   <Font size="16.0" />
                </font>
@@ -70,12 +70,14 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <TableView fx:id="search_table" fixedCellSize="20.0" layoutX="32.0" layoutY="282.0" prefHeight="346.0" prefWidth="392.0">
+            <TableView fx:id="search_table" fixedCellSize="50.0" layoutX="32.0" layoutY="282.0" prefHeight="346.0" prefWidth="390.0">
               <columns>
-                <TableColumn fx:id="name" prefWidth="171.99999618530273" text="課程名稱" />
-                <TableColumn fx:id="time" minWidth="4.800018310546875" prefWidth="89.60002136230469" text="時間" />
-                  <TableColumn fx:id="pro" minWidth="0.0" prefWidth="59.2000732421875" text="授課教師" />
-                  <TableColumn fx:id="tag" prefWidth="71.199951171875" text="標籤" />
+                <TableColumn fx:id="name" prefWidth="196.8000144958496" text="課程名稱" />
+                <TableColumn fx:id="time" minWidth="4.800018310546875" prefWidth="119.19996643066406" text="時間" />
+                  <TableColumn fx:id="pro" minWidth="0.0" prefWidth="75.20001220703125" text="授課教師" />
+                  <TableColumn fx:id="sweet" minWidth="0.0" prefWidth="71.20001220703125" text="甜度" />
+                  <TableColumn fx:id="cool" minWidth="0.0" prefWidth="68.79998779296875" text="冰塊" />
+                  <TableColumn fx:id="att" prefWidth="64.79996337890623" text="點名" />
               </columns>
             </TableView>
       </children>

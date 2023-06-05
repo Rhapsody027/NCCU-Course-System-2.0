@@ -11,10 +11,16 @@ public class App extends Application {
 
     private static Scene scene;
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("home"));
         stage.setScene(scene);
+        stage.setTitle("選課系統2.0");
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -26,9 +32,4 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
 }

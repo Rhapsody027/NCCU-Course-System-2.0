@@ -26,7 +26,7 @@
                <font>
                   <Font size="16.0" />
                </font></RadioButton>
-            <TextField id="search_bar" layoutX="33.0" layoutY="48.0" prefHeight="38.0" prefWidth="330.0">
+            <TextField id="search_bar" fx:id="txt_search" layoutX="33.0" layoutY="48.0" prefHeight="38.0" prefWidth="330.0">
                <font>
                   <Font size="20.0" />
                </font></TextField>
@@ -73,7 +73,7 @@
             <TableView fx:id="search_table" fixedCellSize="50.0" layoutX="32.0" layoutY="282.0" prefHeight="346.0" prefWidth="390.0">
               <columns>
                 <TableColumn fx:id="name" prefWidth="196.8000144958496" text="課程名稱" />
-                <TableColumn fx:id="time" minWidth="4.800018310546875" prefWidth="119.19996643066406" text="時間" />
+                <TableColumn fx:id="time" minWidth="4.800018310546875" prefWidth="119.19996643066406" style="-fx-alignment: BASELINE_CENTER;" text="時間" />
                   <TableColumn fx:id="pro" minWidth="0.0" prefWidth="75.20001220703125" text="授課教師" />
                   <TableColumn fx:id="sweet" minWidth="0.0" prefWidth="71.20001220703125" text="甜度" />
                   <TableColumn fx:id="cool" minWidth="0.0" prefWidth="68.79998779296875" text="冰塊" />

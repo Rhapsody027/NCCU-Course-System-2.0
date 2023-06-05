@@ -1,7 +1,6 @@
 package nccu;
 
 import java.sql.*;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -19,11 +18,10 @@ public class DBConnect {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(sever + dbName, user, password);
             System.out.println("Connect!");
-
             return conn;
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-
             return null;
         }
     }
@@ -43,6 +41,7 @@ public class DBConnect {
                         Integer.parseInt(rs.getString("cool")),
                         rs.getString("att")));
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

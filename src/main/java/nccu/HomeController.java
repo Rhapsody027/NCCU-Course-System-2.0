@@ -111,12 +111,15 @@ public class HomeController implements Initializable {
     }
 
     public void loadPage() {
-        String url = "https://newdoc.nccu.edu.tw/teaschm/";
+        String base = "https://newdoc.nccu.edu.tw/teaschm/";
         String semester = "1112/schmPrv.jsp-yy=111&smt=2&";
         String courseID = "num=031004&gop=02&s=1.html";
-        engine.load(url + semester + courseID);
+        String url = base + semester + courseID;
+        url = "https://stackoverflow.com/questions/69577162/javafx-webview-does-not-display-correctly-an-html-page";
+
         try {
-            engine.load("https://qrysub.nccu.edu.tw");
+            engine.load(url);
+            System.out.println("html!");
         } catch (Exception e) {
             e.printStackTrace();
         }

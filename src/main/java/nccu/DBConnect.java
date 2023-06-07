@@ -36,10 +36,12 @@ public class DBConnect {
             ResultSet rs = stat.executeQuery();
 
             while (rs.next()) {
-                list.add(new Course(rs.getString("name"), rs.getString("time"), rs.getString("pro"),
+                list.add(new Course(rs.getString("name").strip(),
+                        rs.getString("time").strip(),
+                        rs.getString("pro").strip(),
                         Integer.parseInt(rs.getString("sweet")),
                         Integer.parseInt(rs.getString("cool")),
-                        rs.getString("att")));
+                        rs.getString("att").strip(), rs.getString("id")));
             }
 
         } catch (Exception e) {

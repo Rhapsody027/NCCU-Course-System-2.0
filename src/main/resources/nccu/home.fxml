@@ -27,7 +27,7 @@
                <font>
                   <Font size="16.0" />
                </font></RadioButton>
-            <TextField id="search_bar" fx:id="txt_search" layoutX="33.0" layoutY="48.0" prefHeight="38.0" prefWidth="330.0">
+            <TextField id="search_bar" fx:id="search_text" layoutX="33.0" layoutY="48.0" prefHeight="38.0" prefWidth="330.0">
                <font>
                   <Font size="20.0" />
                </font></TextField>
@@ -65,14 +65,15 @@
                </font>
             </Button>
             <ChoiceBox id="select_day" layoutX="32.0" layoutY="121.0" prefHeight="38.0" prefWidth="66.0" />
-            <TableView fx:id="search_table" fixedCellSize="50.0" layoutX="32.0" layoutY="282.0" onMouseClicked="#tableClick" prefHeight="346.0" prefWidth="390.0">
+            <TableView fx:id="search_table" fixedCellSize="50.0" layoutX="29.0" layoutY="282.0" onMouseClicked="#tableClick" prefHeight="355.0" prefWidth="399.0">
               <columns>
-                <TableColumn fx:id="name" prefWidth="196.8000144958496" text="課程名稱" />
-                <TableColumn fx:id="time" minWidth="4.800018310546875" prefWidth="119.19996643066406" style="-fx-alignment: BASELINE_CENTER;" text="時間" />
-                  <TableColumn fx:id="pro" minWidth="0.0" prefWidth="75.20001220703125" text="授課教師" />
-                  <TableColumn fx:id="sweet" minWidth="0.0" prefWidth="71.20001220703125" text="甜度" />
-                  <TableColumn fx:id="cool" minWidth="0.0" prefWidth="68.79998779296875" text="冰塊" />
-                  <TableColumn fx:id="att" prefWidth="64.79996337890623" text="點名" />
+                <TableColumn fx:id="name" prefWidth="153.60000228881836" style="-fx-alignment: center-left;" text="課程名稱" />
+                <TableColumn fx:id="time" minWidth="4.800018310546875" prefWidth="79.20002746582031" style="-fx-alignment: center;" text="時間" />
+                  <TableColumn fx:id="pro" minWidth="0.0" prefWidth="103.20001220703125" style="-fx-alignment: center;" text="授課教師" />
+                  <TableColumn fx:id="sweet" minWidth="0.0" prefWidth="48.0" style="-fx-alignment: center;" text="甜度" />
+                  <TableColumn fx:id="cool" minWidth="0.0" prefWidth="42.4000244140625" style="-fx-alignment: center;" text="冰塊" />
+                  <TableColumn fx:id="att" prefWidth="47.199951171875" style="-fx-alignment: baseline_center;" text="點名" />
+                  <TableColumn fx:id="id" minWidth="0.0" prefWidth="0.0" text="代碼" />
               </columns>
             </TableView>
             <WebView fx:id="webView" layoutX="532.0" layoutY="70.0" prefHeight="286.0" prefWidth="496.0" />

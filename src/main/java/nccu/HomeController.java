@@ -5,7 +5,6 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -18,18 +17,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
-public class HomeController extends Application implements Initializable {
+public class HomeController implements Initializable {
 
     @FXML
     private TableColumn<Course, String> att;
+
+    @FXML
+    private TableColumn<Course, String> id;
 
     @FXML
     private TableColumn<Course, Integer> cool;
@@ -50,7 +45,7 @@ public class HomeController extends Application implements Initializable {
     private TableColumn<Course, String> time;
 
     @FXML
-    private TextField txt_search;
+    private TextField search_text;
 
     @FXML
     private WebView webView;
@@ -59,6 +54,7 @@ public class HomeController extends Application implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
+        id.setCellValueFactory(new PropertyValueFactory<Course, String>("id"));
         name.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
         time.setCellValueFactory(new PropertyValueFactory<Course, String>("time"));
         pro.setCellValueFactory(new PropertyValueFactory<Course, String>("pro"));
@@ -75,15 +71,14 @@ public class HomeController extends Application implements Initializable {
 
             // init search list
             FilteredList<Course> filteredList = new FilteredList<>(list, b -> true);
-            txt_search.textProperty().addListener((observable, oldValue, newValue) -> {
+            search_text.textProperty().addListener((observable, oldValue, newValue) -> {
                 filteredList.setPredicate(Course -> {
 
-                    // txt_search is empty
                     if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
                         return true;
                     }
 
-                    // if txt_search has a match name
+                    // if it has match results
                     String keyWord = newValue;
                     if (Course.getName().indexOf(keyWord) > -1) {
                         return true;
@@ -93,19 +88,19 @@ public class HomeController extends Application implements Initializable {
                 });
             });
 
-            // init webView
-            engine = webView.getEngine();
-            loadPage();
-
             SortedList<Course> sortedList = new SortedList<>(filteredList);
             sortedList.comparatorProperty().bind(search_table.comparatorProperty());
             search_table.setItems(sortedList);
+
+            // init webEngine
+            engine = webView.getEngine();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    // filter table when type in search bar
     public void search(String search_text) {
         search_table.getItems().stream()
                 .filter(item -> item.getName() == search_text)
@@ -116,18 +111,24 @@ public class HomeController extends Application implements Initializable {
                 });
     }
 
+    // load correct page when table is clicked
     @FXML
-    void tableClick(MouseEvent event) {
+    public void tableClick(MouseEvent event) {
+        int index = search_table.getSelectionModel().getSelectedIndex();
+
+        if (index > -1 && event.getClickCount() == 2) {
+            String fileName = id.getCellData(index).toString().strip();
+            loadPage(fileName);
+            System.out.println(fileName); // * first col has a strange '?'
+        }
+
     }
 
-    public void loadPage() {
-        // String base = "https://newdoc.nccu.edu.tw/teaschm/";
-        // String semester = "1112/schmPrv.jsp-yy=111&smt=2&";
-        // String courseID = "num=031004&gop=02&s=1.html";
-        // String url = base + semester + courseID;
-
+    // load local html file to right-top webview
+    // * need to find a way to load file automatically
+    public void loadPage(String fileName) {
         try {
-            File f = new File("pages/page.html");
+            File f = new File("pages/" + fileName + ".html");
             engine.load(f.toURI().toString());
 
         } catch (Exception e) {
@@ -135,7 +136,4 @@ public class HomeController extends Application implements Initializable {
         }
     }
 
-    @Override
-    public void start(Stage arg0) throws Exception {
-    }
 }

@@ -4,12 +4,13 @@ import java.io.File;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
-
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -51,6 +52,17 @@ public class HomeController implements Initializable {
     private WebView webView;
     private WebEngine engine;
 
+    @FXML
+    private RadioButton rad_att;
+
+    @FXML
+    private RadioButton rad_cool;
+
+    @FXML
+    private RadioButton rad_sweet;
+
+    private ObservableList<Course> search_list;
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -62,78 +74,74 @@ public class HomeController implements Initializable {
         cool.setCellValueFactory(new PropertyValueFactory<Course, Integer>("cool"));
         att.setCellValueFactory(new PropertyValueFactory<Course, String>("att"));
 
-        try {
+        // import database to tableview
+        search_list = DBConnect.getData();
+        search_table.setItems(search_list);
+        System.out.println("Import!");
 
-            // import database to tableview
-            ObservableList<Course> list = DBConnect.getData();
-            search_table.setItems(list);
-            System.out.println("Import!");
+        // init search list
+        FilteredList<Course> filteredList = new FilteredList<>(search_list, b -> true);
+        search_text.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredList.setPredicate(Course -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
 
-            // init search list
-            FilteredList<Course> filteredList = new FilteredList<>(list, b -> true);
-            search_text.textProperty().addListener((observable, oldValue, newValue) -> {
-                filteredList.setPredicate(Course -> {
-
-                    if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
-                        return true;
-                    }
-
-                    // if it has match results
-                    String keyWord = newValue;
-                    if (Course.getName().indexOf(keyWord) > -1) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                });
+                // if it has match results
+                String keyWord = newValue;
+                // if (search(Course, keyWord) > -1) {
+                if (Course.getName().indexOf(keyWord) > -1) {
+                    return true;
+                } else {
+                    return false;
+                }
             });
+        });
 
-            SortedList<Course> sortedList = new SortedList<>(filteredList);
-            sortedList.comparatorProperty().bind(search_table.comparatorProperty());
-            search_table.setItems(sortedList);
+        SortedList<Course> sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(search_table.comparatorProperty());
+        search_table.setItems(sortedList);
 
-            // init webEngine
-            engine = webView.getEngine();
+        // init webEngine
+        engine = webView.getEngine();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     // filter table when type in search bar
-    public void search(String search_text) {
-        search_table.getItems().stream()
-                .filter(item -> item.getName() == search_text)
-                .findAny()
-                .ifPresent(item -> {
-                    search_table.getSelectionModel().select(item);
-                    search_table.scrollTo(item);
-                });
+    public int search(Course course, String keyWord) {
+        return course.getName().indexOf(keyWord);
     }
 
-    // load correct page when table is clicked
-    @FXML
+    public void getTagFilter(ActionEvent event) throws SQLException {
+        if (rad_sweet.isSelected()) {
+            FilteredList<Course> filteredList = new FilteredList<>(search_list, b -> true);
+            filteredList.setPredicate(Course -> Course.getSweet() == 5);
+            search_table.setItems(new SortedList<>(filteredList));
+
+        } else if (!rad_sweet.isSelected()) {
+            search_table.setItems(search_list);
+        }
+        if (rad_cool.isSelected())
+
+        {
+            System.out.println(rad_cool.getId());
+        }
+        if (rad_att.isSelected()) {
+            System.out.println(rad_att.getId());
+        }
+    }
+
+    // load webViewl when table is double-licked (#0db4be)
+    // * need to find a way to load file automatically
     public void tableClick(MouseEvent event) {
         int index = search_table.getSelectionModel().getSelectedIndex();
 
         if (index > -1 && event.getClickCount() == 2) {
             String fileName = id.getCellData(index).toString().strip();
-            loadPage(fileName);
-            System.out.println(fileName); // * first col has a strange '?'
-        }
-
-    }
-
-    // load local html file to right-top webview
-    // * need to find a way to load file automatically
-    public void loadPage(String fileName) {
-        try {
             File f = new File("pages/" + fileName + ".html");
-            engine.load(f.toURI().toString());
+            System.out.println(fileName); // * first col has a strange '?'
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            engine.load(f.toURI().toString());
         }
     }
-
 }

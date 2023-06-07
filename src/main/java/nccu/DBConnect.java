@@ -26,11 +26,10 @@ public class DBConnect {
         }
     }
 
-    public static ObservableList<Course> getData() throws SQLException {
-        Connection conn = connect();
-        ObservableList<Course> list = FXCollections.observableArrayList();
-
+    public static ObservableList<Course> getData() {
         try {
+            Connection conn = connect();
+            ObservableList<Course> list = FXCollections.observableArrayList();
             String sql = "SELECT * FROM nccu LIMIT 149;";
             PreparedStatement stat = conn.prepareStatement(sql);
             ResultSet rs = stat.executeQuery();
@@ -44,10 +43,11 @@ public class DBConnect {
                         rs.getString("att").strip(), rs.getString("id")));
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            return list;
 
-        return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

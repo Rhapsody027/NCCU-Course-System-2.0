@@ -23,7 +23,7 @@
                   <Image url="@home.jpg" />
                </image>
             </ImageView>
-            <RadioButton id="select_att" layoutX="323.0" layoutY="200.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" text="不用點名">
+            <RadioButton id="tag_att" fx:id="rad_att" focusTraversable="false" layoutX="323.0" layoutY="200.0" mnemonicParsing="false" onAction="#getTagFilter" prefHeight="30.0" prefWidth="103.0" text="不用點名">
                <font>
                   <Font size="16.0" />
                </font></RadioButton>
@@ -32,7 +32,7 @@
                   <Font size="20.0" />
                </font></TextField>
             <ChoiceBox id="select_type" layoutX="230.0" layoutY="121.0" prefHeight="38.0" prefWidth="193.0" />
-            <Button id="btn_add" layoutX="1036.0" layoutY="234.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="82.0" text="add">
+            <Button id="btn_add" layoutX="1056.0" layoutY="255.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="33.0" text="add">
                <font>
                   <Font size="20.0" />
                </font>
@@ -43,12 +43,12 @@
                   <Font size="17.0" />
                </font>
             </Button>
-            <RadioButton id="select_sweet" layoutX="32.0" layoutY="200.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" text="甜到蛀牙">
+            <RadioButton id="tag_sweet" fx:id="rad_sweet" focusTraversable="false" layoutX="32.0" layoutY="200.0" mnemonicParsing="false" onAction="#getTagFilter" prefHeight="30.0" prefWidth="103.0" text="甜到蛀牙">
                <font>
                   <Font size="16.0" />
                </font>
             </RadioButton>
-            <RadioButton id="select_chill" layoutX="176.0" layoutY="200.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" text="涼到發抖">
+            <RadioButton id="tag_cool" fx:id="rad_cool" focusTraversable="false" layoutX="176.0" layoutY="200.0" mnemonicParsing="false" onAction="#getTagFilter" prefHeight="30.0" prefWidth="103.0" text="涼到發抖">
                <font>
                   <Font size="16.0" />
                </font>
@@ -59,7 +59,7 @@
                   <Font size="20.0" />
                </font>
             </TextField>
-            <Button id="btn_check" layoutX="1036.0" layoutY="130.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="82.0" text="check">
+            <Button id="btn_check" layoutX="1056.0" layoutY="128.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="30.0" text="check">
                <font>
                   <Font size="20.0" />
                </font>
@@ -76,7 +76,7 @@
                   <TableColumn fx:id="id" minWidth="0.0" prefWidth="0.0" text="代碼" />
               </columns>
             </TableView>
-            <WebView fx:id="webView" layoutX="532.0" layoutY="70.0" prefHeight="286.0" prefWidth="496.0" />
+            <WebView fx:id="webView" layoutX="518.0" layoutY="70.0" prefHeight="294.0" prefWidth="526.0" />
       </children>
     </AnchorPane>
   </children>

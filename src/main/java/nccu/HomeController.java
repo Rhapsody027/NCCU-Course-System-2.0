@@ -1,8 +1,11 @@
 package nccu;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
+
+import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -15,8 +18,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
-public class HomeController implements Initializable {
+public class HomeController extends Application implements Initializable {
 
     @FXML
     private TableColumn<Course, String> att;
@@ -111,17 +121,21 @@ public class HomeController implements Initializable {
     }
 
     public void loadPage() {
-        String base = "https://newdoc.nccu.edu.tw/teaschm/";
-        String semester = "1112/schmPrv.jsp-yy=111&smt=2&";
-        String courseID = "num=031004&gop=02&s=1.html";
-        String url = base + semester + courseID;
-        url = "https://stackoverflow.com/questions/69577162/javafx-webview-does-not-display-correctly-an-html-page";
+        // String base = "https://newdoc.nccu.edu.tw/teaschm/";
+        // String semester = "1112/schmPrv.jsp-yy=111&smt=2&";
+        // String courseID = "num=031004&gop=02&s=1.html";
+        // String url = base + semester + courseID;
 
         try {
-            engine.load(url);
-            System.out.println("html!");
+            File f = new File("pages/page.html");
+            engine.load(f.toURI().toString());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void start(Stage arg0) throws Exception {
     }
 }

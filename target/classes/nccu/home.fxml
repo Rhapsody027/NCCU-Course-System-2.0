@@ -23,7 +23,7 @@
                   <Image url="@home.jpg" />
                </image>
             </ImageView>
-            <RadioButton id="tag_att" fx:id="rad_att" focusTraversable="false" layoutX="323.0" layoutY="200.0" mnemonicParsing="false" onAction="#getTagFilter" prefHeight="30.0" prefWidth="103.0" text="不用點名">
+            <RadioButton id="select_att" fx:id="rad_att" focusTraversable="false" layoutX="323.0" layoutY="200.0" mnemonicParsing="false" onAction="#getTagFilter" prefHeight="30.0" prefWidth="103.0" text="不用點名">
                <font>
                   <Font size="16.0" />
                </font></RadioButton>
@@ -31,7 +31,7 @@
                <font>
                   <Font size="20.0" />
                </font></TextField>
-            <ChoiceBox id="select_type" layoutX="230.0" layoutY="121.0" prefHeight="38.0" prefWidth="193.0" />
+            <ChoiceBox id="select_type" fx:id="box_type" layoutX="230.0" layoutY="121.0" prefHeight="38.0" prefWidth="193.0" />
             <Button id="btn_add" layoutX="1056.0" layoutY="255.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="33.0" text="add">
                <font>
                   <Font size="20.0" />
@@ -53,7 +53,7 @@
                   <Font size="16.0" />
                </font>
             </RadioButton>
-            <ChoiceBox id="select_day" layoutX="116.0" layoutY="121.0" prefHeight="38.0" prefWidth="95.0" />
+            <ChoiceBox id="select_day" fx:id="box_time" layoutX="116.0" layoutY="121.0" prefHeight="38.0" prefWidth="95.0" />
             <TextField id="search_bar" layoutX="532.0" layoutY="603.0" prefHeight="38.0" prefWidth="496.0">
                <font>
                   <Font size="20.0" />
@@ -64,8 +64,8 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <ChoiceBox id="select_day" layoutX="32.0" layoutY="121.0" prefHeight="38.0" prefWidth="66.0" />
-            <TableView fx:id="search_table" fixedCellSize="50.0" layoutX="29.0" layoutY="282.0" onMouseClicked="#tableClick" prefHeight="355.0" prefWidth="399.0">
+            <ChoiceBox id="select_day" fx:id="box_day" layoutX="32.0" layoutY="121.0" prefHeight="38.0" prefWidth="66.0" />
+            <TableView fx:id="search_table" fixedCellSize="50.0" layoutX="29.0" layoutY="282.0" onMouseClicked="#loadWebView" prefHeight="355.0" prefWidth="399.0">
               <columns>
                 <TableColumn fx:id="name" prefWidth="153.60000228881836" style="-fx-alignment: center-left;" text="課程名稱" />
                 <TableColumn fx:id="time" minWidth="4.800018310546875" prefWidth="79.20002746582031" style="-fx-alignment: center;" text="時間" />

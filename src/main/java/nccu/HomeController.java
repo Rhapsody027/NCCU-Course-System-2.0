@@ -2,14 +2,16 @@ package nccu;
 
 import java.io.File;
 import java.net.URL;
-import java.sql.*;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -61,11 +63,23 @@ public class HomeController implements Initializable {
     @FXML
     private RadioButton rad_sweet;
 
+    @FXML
+    private ChoiceBox<String> box_day;
+
+    @FXML
+    private ChoiceBox<String> box_time;
+
+    @FXML
+    private ChoiceBox<String> box_type;
+
     private ObservableList<Course> search_list;
+    private FilteredList<Course> filteredList;
+    private SortedList<Course> sortedList;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
+        // set tableView cell value
         id.setCellValueFactory(new PropertyValueFactory<Course, String>("id"));
         name.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
         time.setCellValueFactory(new PropertyValueFactory<Course, String>("time"));
@@ -79,18 +93,14 @@ public class HomeController implements Initializable {
         search_table.setItems(search_list);
         System.out.println("Import!");
 
-        // init search list
-        FilteredList<Course> filteredList = new FilteredList<>(search_list, b -> true);
+        // setup search_bar
+        filteredList = new FilteredList<>(search_list, b -> true);
         search_text.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredList.setPredicate(Course -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
 
-                // if it has match results
-                String keyWord = newValue;
-                // if (search(Course, keyWord) > -1) {
-                if (Course.getName().indexOf(keyWord) > -1) {
+                if (Course.getName().indexOf(newValue) > -1) {
+                    return true;
+                } else if (newValue == null || newValue.isEmpty()) {
                     return true;
                 } else {
                     return false;
@@ -98,42 +108,100 @@ public class HomeController implements Initializable {
             });
         });
 
-        SortedList<Course> sortedList = new SortedList<>(filteredList);
-        sortedList.comparatorProperty().bind(search_table.comparatorProperty());
-        search_table.setItems(sortedList);
+        refreshTableFilter();
 
         // init webEngine
         engine = webView.getEngine();
 
+        // init choiceBoxes
+        String[] days = { null, "一", "二", "三", "四", "五" };
+        box_day.getItems().addAll(days);
+        box_day.setOnAction(this::getChoiceFilter);
+
+        String[] time = { null, "早上9-12", "下午1-4", "下午4-6", "晚上6-9" };
+        box_time.getItems().addAll(time);
+        box_time.setOnAction(this::getChoiceFilter);
+
+        String[] types = { null, "國文", "英文", "體育", "必修", "通識" };
+        box_type.getItems().addAll(types);
+        box_type.setOnAction(this::getChoiceFilter);
+
     }
 
-    // filter table when type in search bar
-    public int search(Course course, String keyWord) {
-        return course.getName().indexOf(keyWord);
+    public void refreshTableFilter() {
+        sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(search_table.comparatorProperty());
+        search_table.setItems(sortedList);
     }
 
-    public void getTagFilter(ActionEvent event) throws SQLException {
+    @FXML
+    public void getChoiceFilter(ActionEvent event) {
+
+        Predicate<Course> combinedPredicate = null;
+        Predicate<Course> dayPredicate;
+        Predicate<Course> timePredicate;
+        Predicate<Course> typePredicate;
+
+        if (box_day.getValue() != null) {
+            dayPredicate = Course -> Course.getTime().contains(box_day.getValue());
+        } else {
+            dayPredicate = Course -> true;
+        }
+
+        if (box_time.getValue() != null) {
+            timePredicate = Course -> Course.getTime().contains(box_time.getValue());
+        } else {
+            timePredicate = Course -> true;
+        }
+
+        if (box_type.getValue() != null) {
+            typePredicate = Course -> Course.getName().contains(box_type.getValue());
+        } else {
+            typePredicate = Course -> true;
+        }
+
+        combinedPredicate = dayPredicate.and(timePredicate).and(typePredicate);
+        filteredList.setPredicate(combinedPredicate);
+        refreshTableFilter();
+    }
+
+    @FXML
+    public void getTagFilter(ActionEvent event) {
+        int sweetStandard = 5;
+        int coolStandard = 5;
+
+        Predicate<Course> combinedPredicate = null;
+        Predicate<Course> sweetPredicate;
+        Predicate<Course> coolPredicate;
+        Predicate<Course> attPredicate;
+
         if (rad_sweet.isSelected()) {
-            FilteredList<Course> filteredList = new FilteredList<>(search_list, b -> true);
-            filteredList.setPredicate(Course -> Course.getSweet() == 5);
-            search_table.setItems(new SortedList<>(filteredList));
-
-        } else if (!rad_sweet.isSelected()) {
-            search_table.setItems(search_list);
+            sweetPredicate = Course -> Course.getSweet() >= sweetStandard;
+        } else {
+            sweetPredicate = Course -> true;
         }
-        if (rad_cool.isSelected())
 
-        {
-            System.out.println(rad_cool.getId());
+        if (rad_cool.isSelected()) {
+            coolPredicate = Course -> Course.getCool() >= coolStandard;
+        } else {
+            coolPredicate = Course -> true;
         }
+
         if (rad_att.isSelected()) {
-            System.out.println(rad_att.getId());
+            attPredicate = Course -> Course.getAtt().equals("否");
+        } else {
+            attPredicate = Course -> true;
         }
+
+        combinedPredicate = sweetPredicate.and(coolPredicate).and(attPredicate);
+        filteredList.setPredicate(combinedPredicate);
+        refreshTableFilter();
     }
 
     // load webViewl when table is double-licked (#0db4be)
     // * need to find a way to load file automatically
-    public void tableClick(MouseEvent event) {
+    @FXML
+    public void loadWebView(MouseEvent event) {
         int index = search_table.getSelectionModel().getSelectedIndex();
 
         if (index > -1 && event.getClickCount() == 2) {

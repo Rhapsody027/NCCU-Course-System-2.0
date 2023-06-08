@@ -118,7 +118,7 @@ public class HomeController implements Initializable {
         box_day.getItems().addAll(days);
         box_day.setOnAction(this::getChoiceFilter);
 
-        String[] time = { null, "早上9-12", "下午1-4", "下午4-6", "晚上6-9" };
+        String[] time = { null, "早上09-12", "下午13-16", "下午16-18", "晚上18-21" };
         box_time.getItems().addAll(time);
         box_time.setOnAction(this::getChoiceFilter);
 
@@ -149,13 +149,30 @@ public class HomeController implements Initializable {
         }
 
         if (box_time.getValue() != null) {
-            timePredicate = Course -> Course.getTime().contains(box_time.getValue());
+            timePredicate = Course -> {
+                return inTimeSeclect(Course.getTime(), box_time.getValue());
+            };
         } else {
             timePredicate = Course -> true;
         }
 
+        // * need to add a tag for course type, such as "必修", "人文通識" etc.
         if (box_type.getValue() != null) {
-            typePredicate = Course -> Course.getName().contains(box_type.getValue());
+            String[] alt_way = { "國文", "英文", "體育", "學", "管理", "入門" };
+            typePredicate = Course -> {
+                if (box_type.getValue() == "通識") {
+                    boolean flag = true;
+                    for (String keyword : alt_way) {
+                        if (Course.getName().contains(keyword)) {
+                            flag = false;
+                        }
+                    }
+                    return flag;
+
+                } else {
+                    return Course.getName().contains(box_type.getValue());
+                }
+            };
         } else {
             typePredicate = Course -> true;
         }
@@ -163,6 +180,18 @@ public class HomeController implements Initializable {
         combinedPredicate = dayPredicate.and(timePredicate).and(typePredicate);
         filteredList.setPredicate(combinedPredicate);
         refreshTableFilter();
+    }
+
+    // * use String? int? another property?
+    public boolean inTimeSeclect(String courseTime, String timeSelect) {
+        String[] time_session = {};
+
+        for (String time : time_session) {
+            if (courseTime.contains(time)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @FXML

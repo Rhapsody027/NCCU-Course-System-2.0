@@ -6,31 +6,34 @@ import javafx.collections.ObservableList;
 
 public class DBConnect {
 
-    private static Connection conn;
+    protected static Connection conn;
     private static String sever = "jdbc:mysql://localhost/";
-    // private static String severPhp = "jdbc:mysql:// 140.119.19.73:3315/";
     private static String dbName = "nccu";
     private static String user = "vscode";
     private static String password = "2003";
 
-    public static Connection connect() throws SQLException {
+    public static Connection connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(sever + dbName, user, password);
             System.out.println("Connect!");
+
             return conn;
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return null;
     }
 
-    public static ObservableList<Course> getData() {
+    public static ObservableList<Course> getCourseData() {
         try {
             Connection conn = connect();
             ObservableList<Course> list = FXCollections.observableArrayList();
-            String sql = "SELECT * FROM nccu LIMIT 149;";
+            String sql = "SELECT * FROM nccu LIMIT 149";
             PreparedStatement stat = conn.prepareStatement(sql);
             ResultSet rs = stat.executeQuery();
 
@@ -50,4 +53,5 @@ public class DBConnect {
             return null;
         }
     }
+
 }

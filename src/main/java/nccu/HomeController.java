@@ -11,10 +11,13 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -72,6 +75,15 @@ public class HomeController implements Initializable {
     @FXML
     private ChoiceBox<String> box_type;
 
+    @FXML
+    private TextArea comment_txt;
+
+    @FXML
+    private ListView<String> comment_list;
+
+    @FXML
+    private Button btn_post;
+
     private ObservableList<Course> search_list;
     private FilteredList<Course> filteredList;
     private SortedList<Course> sortedList;
@@ -89,7 +101,7 @@ public class HomeController implements Initializable {
         att.setCellValueFactory(new PropertyValueFactory<Course, String>("att"));
 
         // import database to tableview
-        search_list = DBConnect.getData();
+        search_list = DBConnect.getCourseData();
         search_table.setItems(search_list);
         System.out.println("Import!");
 
@@ -126,6 +138,20 @@ public class HomeController implements Initializable {
         box_type.getItems().addAll(types);
         box_type.setOnAction(this::getChoiceFilter);
 
+        // setup comment function
+        btn_post.setOnAction(event -> postMessage());
+        Comment.updateMessageList(comment_list);
+
+    }
+
+    public void postMessage() {
+        String content = comment_txt.getText();
+        comment_txt.clear();
+
+        if (content != "") {
+            Comment.insertMessage(content);
+            comment_list = Comment.updateMessageList(comment_list);
+        }
     }
 
     public void refreshTableFilter() {

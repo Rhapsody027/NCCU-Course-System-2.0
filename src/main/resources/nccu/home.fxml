@@ -55,7 +55,7 @@
                </font>
             </RadioButton>
             <ChoiceBox id="select_day" fx:id="box_time" focusTraversable="false" layoutX="116.0" layoutY="121.0" prefHeight="38.0" prefWidth="95.0" />
-            <Button id="btn_check" layoutX="1056.0" layoutY="128.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="30.0" text="check">
+            <Button id="btn_check" fx:id="btn_sorting" layoutX="1056.0" layoutY="128.0" mnemonicParsing="false" onAction="#switchStage" prefHeight="38.0" prefWidth="30.0" text="check">
                <font>
                   <Font size="20.0" />
                </font>

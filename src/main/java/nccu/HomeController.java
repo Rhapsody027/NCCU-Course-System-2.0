@@ -1,6 +1,7 @@
 package nccu;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
@@ -83,6 +84,9 @@ public class HomeController implements Initializable {
 
     @FXML
     private Button btn_post;
+
+    @FXML
+    private Button btn_sorting;
 
     private ObservableList<Course> search_list;
     private FilteredList<Course> filteredList;
@@ -267,6 +271,15 @@ public class HomeController implements Initializable {
             }
         }
         return false;
+    }
+
+    @FXML
+    public void switchStage(ActionEvent event) {
+        try {
+            App.setRoot("sorting");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // refresh search tableView with new filter

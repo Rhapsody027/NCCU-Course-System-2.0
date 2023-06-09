@@ -156,6 +156,7 @@ public class HomeController implements Initializable {
         }
     }
 
+    // TODO: add exclude function
     // filter search tableView with choiceBoxes selected
     @FXML
     public void getChoiceFilter(ActionEvent event) {

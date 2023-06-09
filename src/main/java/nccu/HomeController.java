@@ -144,6 +144,8 @@ public class HomeController implements Initializable {
 
     }
 
+    // actions after press post button
+    @FXML
     public void postMessage() {
         String content = comment_txt.getText();
         comment_txt.clear();
@@ -154,12 +156,7 @@ public class HomeController implements Initializable {
         }
     }
 
-    public void refreshTableFilter() {
-        sortedList = new SortedList<>(filteredList);
-        sortedList.comparatorProperty().bind(search_table.comparatorProperty());
-        search_table.setItems(sortedList);
-    }
-
+    // filter search tableView with choiceBoxes selected
     @FXML
     public void getChoiceFilter(ActionEvent event) {
 
@@ -176,7 +173,7 @@ public class HomeController implements Initializable {
 
         if (box_time.getValue() != null) {
             timePredicate = Course -> {
-                return inTimeSeclect(Course.getTime(), box_time.getValue());
+                return isInTimeSeclect(Course.getTime(), box_time.getValue());
             };
         } else {
             timePredicate = Course -> true;
@@ -208,18 +205,7 @@ public class HomeController implements Initializable {
         refreshTableFilter();
     }
 
-    // * use String? int? another property?
-    public boolean inTimeSeclect(String courseTime, String timeSelect) {
-        String[] time_session = {};
-
-        for (String time : time_session) {
-            if (courseTime.contains(time)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    // filter search tableView with tags selected
     @FXML
     public void getTagFilter(ActionEvent event) {
         int sweetStandard = 5;
@@ -253,10 +239,11 @@ public class HomeController implements Initializable {
         refreshTableFilter();
     }
 
-    // load webViewl when table is double-licked (#0db4be)
     // * need to find a way to load file automatically
+    // TODO: connect course id with comment text
+    // load comment list and webView (#0db4be) with selected course id
     @FXML
-    public void loadWebView(MouseEvent event) {
+    public void tableDoubleClick(MouseEvent event) {
         int index = search_table.getSelectionModel().getSelectedIndex();
 
         if (index > -1 && event.getClickCount() == 2) {
@@ -266,5 +253,25 @@ public class HomeController implements Initializable {
 
             engine.load(f.toURI().toString());
         }
+    }
+
+    // TODO: how to identify time session: String? int? another property?
+    // whether the course time is in seleceted session
+    public boolean isInTimeSeclect(String courseTime, String timeSelect) {
+        String[] time_session = {};
+
+        for (String time : time_session) {
+            if (courseTime.contains(time)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // refresh search tableView with new filter
+    public void refreshTableFilter() {
+        sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(search_table.comparatorProperty());
+        search_table.setItems(sortedList);
     }
 }

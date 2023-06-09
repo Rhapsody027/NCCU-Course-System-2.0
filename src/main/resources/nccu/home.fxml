@@ -61,7 +61,7 @@
                </font>
             </Button>
             <ChoiceBox id="select_day" fx:id="box_day" focusTraversable="false" layoutX="32.0" layoutY="121.0" prefHeight="38.0" prefWidth="66.0" />
-            <TableView fx:id="search_table" fixedCellSize="50.0" layoutX="29.0" layoutY="282.0" onMouseClicked="#loadWebView" prefHeight="355.0" prefWidth="399.0">
+            <TableView fx:id="search_table" fixedCellSize="50.0" layoutX="29.0" layoutY="282.0" onMouseClicked="#tableDoubleClick" prefHeight="355.0" prefWidth="399.0">
               <columns>
                 <TableColumn fx:id="name" prefWidth="153.60000228881836" style="-fx-alignment: center-left;" text="課程名稱" />
                 <TableColumn fx:id="time" minWidth="4.800018310546875" prefWidth="79.20002746582031" style="-fx-alignment: center;" text="時間" />

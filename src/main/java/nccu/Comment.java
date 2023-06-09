@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 
 public class Comment extends DBConnect {
 
+    // * find a better way (sweet, like...) to make comments
     public static void insertMessage(String content) {
         try {
             PreparedStatement statement = conn.prepareStatement(
@@ -21,14 +22,14 @@ public class Comment extends DBConnect {
         }
     }
 
-    // * add a argument for course id
+    // TODO: add an argument for course id
     public static ListView<String> updateMessageList(ListView<String> comment_list) {
         comment_list.getItems().clear();
 
         try {
             Statement statement = conn.createStatement();
 
-            // * change this to get filtered comment
+            // TODO: change this to get filtered comment
             ResultSet resultSet = statement.executeQuery("SELECT * FROM comment");
 
             while (resultSet.next()) {

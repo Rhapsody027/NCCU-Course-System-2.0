@@ -29,6 +29,7 @@ public class DBConnect {
         return null;
     }
 
+    // * maybe get data after search?
     public static ObservableList<Course> getCourseData() {
         try {
             Connection conn = connect();

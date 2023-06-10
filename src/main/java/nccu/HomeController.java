@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
@@ -88,9 +89,18 @@ public class HomeController implements Initializable {
     @FXML
     private Button btn_sorting;
 
+    @FXML
+    private Button btn_addCourse;
+
+    @FXML
+    private CheckBox check_exclude;
+
     private ObservableList<Course> search_list;
     private FilteredList<Course> filteredList;
     private SortedList<Course> sortedList;
+
+    // global var for the course id be double clicked in search table
+    private String selectedCourseID;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -144,8 +154,6 @@ public class HomeController implements Initializable {
 
         // setup comment function
         btn_post.setOnAction(event -> postMessage());
-        Comment.updateMessageList(comment_list);
-
     }
 
     // actions after press post button
@@ -155,12 +163,10 @@ public class HomeController implements Initializable {
         comment_txt.clear();
 
         if (content != "") {
-            Comment.insertMessage(content);
-            comment_list = Comment.updateMessageList(comment_list);
+            Comment.insertMessage(selectedCourseID, content);
         }
     }
 
-    // TODO: add exclude function
     // filter search tableView with choiceBoxes selected
     @FXML
     public void getChoiceFilter(ActionEvent event) {
@@ -186,7 +192,7 @@ public class HomeController implements Initializable {
 
         // * need to add a tag for course type, such as "必修", "人文通識" etc.
         if (box_type.getValue() != null) {
-            String[] alt_way = { "國文", "英文", "體育", "學", "管理", "入門" };
+            String[] alt_way = { "國文", "英文", "體育", "學 ", "管理", "入門" };
             typePredicate = Course -> {
                 if (box_type.getValue() == "通識") {
                     boolean flag = true;
@@ -205,7 +211,15 @@ public class HomeController implements Initializable {
             typePredicate = Course -> true;
         }
 
-        combinedPredicate = dayPredicate.and(timePredicate).and(typePredicate);
+        // setup exclude checkbox
+        if (!check_exclude.isSelected()) {
+            combinedPredicate = dayPredicate.and(timePredicate).and(typePredicate);
+        } else if (check_exclude.isSelected()) {
+            // 笛摩根定理
+            combinedPredicate = dayPredicate.negate()
+                    .or(timePredicate.negate()).or(typePredicate.negate());
+        }
+
         filteredList.setPredicate(combinedPredicate);
         refreshTableFilter();
     }
@@ -245,19 +259,31 @@ public class HomeController implements Initializable {
     }
 
     // * need to find a way to load file automatically
-    // TODO: connect course id with comment text
     // load comment list and webView (#0db4be) with selected course id
     @FXML
     public void tableDoubleClick(MouseEvent event) {
         int index = search_table.getSelectionModel().getSelectedIndex();
 
         if (index > -1 && event.getClickCount() == 2) {
-            String fileName = id.getCellData(index).toString().strip();
-            File f = new File("pages/" + fileName + ".html");
-            System.out.println(fileName); // * first col has a strange '?'
+            selectedCourseID = id.getCellData(index).toString().strip();
 
+            // first col has a strange '?'
+            if (selectedCourseID.length() > 9) {
+                selectedCourseID = selectedCourseID.substring(1);
+            }
+
+            File f = new File("pages/" + selectedCourseID + ".html");
             engine.load(f.toURI().toString());
+
+            System.out.println(selectedCourseID);
         }
+
+        comment_list = Comment.updateMessageList(selectedCourseID, comment_list);
+    }
+
+    @FXML
+    void addCourse(ActionEvent event) {
+
     }
 
     // TODO: how to identify time session: String? int? another property?

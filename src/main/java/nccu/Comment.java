@@ -10,11 +10,14 @@ import javafx.scene.control.*;
 public class Comment extends DBConnect {
 
     // * find a better way (sweet, like...) to make comments
-    public static void insertMessage(String content) {
+    public static void insertMessage(String courseID, String content) {
         try {
+            String id = courseID;
+
             PreparedStatement statement = conn.prepareStatement(
-                    "INSERT INTO comment (content) VALUES (?)");
-            statement.setString(1, content);
+                    "INSERT INTO comment (id, content) VALUES (?, ?)");
+            statement.setString(1, id);
+            statement.setString(2, content);
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -22,15 +25,15 @@ public class Comment extends DBConnect {
         }
     }
 
-    // TODO: add an argument for course id
-    public static ListView<String> updateMessageList(ListView<String> comment_list) {
+    public static ListView<String> updateMessageList(String courseID,
+            ListView<String> comment_list) {
+
         comment_list.getItems().clear();
 
         try {
             Statement statement = conn.createStatement();
-
-            // TODO: change this to get filtered comment
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM comment");
+            ResultSet resultSet = statement
+                    .executeQuery("SELECT * FROM comment WHERE id LIKE '%" + courseID + "%'");
 
             while (resultSet.next()) {
                 String username = resultSet.getString("username");

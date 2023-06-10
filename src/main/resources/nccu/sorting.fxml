@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nccu.SortingController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
@@ -22,12 +23,12 @@
                   <Image url="@sorting.jpg" />
                </image>
             </ImageView>
-            <RadioButton layoutX="132.0" layoutY="596.0" mnemonicParsing="false" text="隱藏灌檔衝堂">
+            <RadioButton focusTraversable="false" layoutX="132.0" layoutY="596.0" mnemonicParsing="false" text="隱藏灌檔衝堂">
                <font>
                   <Font size="19.0" />
                </font>
             </RadioButton>
-            <ChoiceBox layoutX="319.0" layoutY="589.0" prefHeight="40.0" prefWidth="275.0" />
+            <ChoiceBox focusTraversable="false" layoutX="319.0" layoutY="589.0" prefHeight="40.0" prefWidth="275.0" />
             <TableView layoutX="51.0" layoutY="48.0" prefHeight="517.0" prefWidth="622.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="C1" />
@@ -52,6 +53,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
+            <Button fx:id="btn_home" layoutX="51.0" layoutY="578.0" mnemonicParsing="false" onAction="#switchScene" prefHeight="54.0" prefWidth="47.0" text="home" />
          </children>
     </AnchorPane>
   </children>

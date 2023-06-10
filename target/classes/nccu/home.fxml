@@ -34,7 +34,7 @@
                   <Font size="20.0" />
                </font></TextField>
             <ChoiceBox id="select_type" fx:id="box_type" focusTraversable="false" layoutX="230.0" layoutY="121.0" prefHeight="38.0" prefWidth="95.0" />
-            <Button id="btn_add" layoutX="1056.0" layoutY="255.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="33.0" text="add">
+            <Button id="btn_add" fx:id="btn_addCourse" layoutX="1056.0" layoutY="255.0" mnemonicParsing="false" onAction="#addCourse" prefHeight="40.0" prefWidth="33.0" text="add">
                <font>
                   <Font size="20.0" />
                </font>
@@ -73,7 +73,7 @@
               </columns>
             </TableView>
             <WebView fx:id="webView" layoutX="518.0" layoutY="70.0" prefHeight="294.0" prefWidth="526.0" />
-            <CheckBox focusTraversable="false" layoutX="347.0" layoutY="127.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" text="排除" textAlignment="CENTER">
+            <CheckBox fx:id="check_exclude" focusTraversable="false" layoutX="347.0" layoutY="127.0" mnemonicParsing="false" onAction="#getChoiceFilter" prefHeight="30.0" prefWidth="66.0" text="排除" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
                </font>

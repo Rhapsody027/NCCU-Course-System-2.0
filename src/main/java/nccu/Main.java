@@ -183,13 +183,11 @@ public class Main extends Application {
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue,
                             Boolean newValue) {
 
-
                         if (newValue) {
                             ((Cell) node).hoverHighlight();
                         } else {
                             ((Cell) node).hoverUnhighlight();
                         }
-
 
                     }
 

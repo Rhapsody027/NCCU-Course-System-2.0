@@ -14,7 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class OverflowPaintableGrid extends Application {
 
     boolean showHoverCursor = true;
 

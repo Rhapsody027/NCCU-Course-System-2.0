@@ -107,20 +107,17 @@ public class OverflowPaintableGrid extends Application {
 
         }
 
-        public Cell getCell(int column, int row) {
-            return cells[row][column];
-        }
+        // public Cell getCell(int column, int row) {
+        // return cells[row][column];
+        // }
 
-        /**
-         * Unhighlight all cells
-         */
-        public void unhighlight() {
-            for (int row = 0; row < rows; row++) {
-                for (int col = 0; col < columns; col++) {
-                    cells[row][col].unhighlight();
-                }
-            }
-        }
+        // public void unhighlight() {
+        // for (int row = 0; row < rows; row++) {
+        // for (int col = 0; col < columns; col++) {
+        // cells[row][col].unhighlight();
+        // }
+        // }
+        // }
     }
 
     private class Cell extends StackPane {

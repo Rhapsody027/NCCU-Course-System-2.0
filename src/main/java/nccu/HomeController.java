@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -96,11 +97,13 @@ public class HomeController implements Initializable {
     private CheckBox check_exclude;
 
     private ObservableList<Course> search_list;
+    private ObservableList<Course> select_list = FXCollections.observableArrayList();;
     private FilteredList<Course> filteredList;
     private SortedList<Course> sortedList;
 
     // global var for the course id be double clicked in search table
     private String selectedCourseID;
+    private String selectCourseName;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -265,6 +268,7 @@ public class HomeController implements Initializable {
         int index = search_table.getSelectionModel().getSelectedIndex();
 
         if (index > -1 && event.getClickCount() == 2) {
+            selectCourseName = name.getCellData(index).toString();
             selectedCourseID = id.getCellData(index).toString().strip();
 
             // first col has a strange '?'
@@ -283,7 +287,8 @@ public class HomeController implements Initializable {
 
     @FXML
     void addCourse(ActionEvent event) {
-
+        select_list.add(new Course("hihi"));
+        System.out.println("add");
     }
 
     // TODO: how to identify time session: String? int? another property?
@@ -313,5 +318,12 @@ public class HomeController implements Initializable {
         sortedList = new SortedList<>(filteredList);
         sortedList.comparatorProperty().bind(search_table.comparatorProperty());
         search_table.setItems(sortedList);
+    }
+
+    public ObservableList<Course> getCourseSelect() {
+        System.out.println("send data!");
+        System.out.println(select_list.toString());
+        select_list.add(new Course("hihi"));
+        return select_list;
     }
 }

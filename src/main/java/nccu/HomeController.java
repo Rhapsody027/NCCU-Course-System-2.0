@@ -286,12 +286,12 @@ public class HomeController implements Initializable {
     // add course to sortingList
     @FXML
     public void addCourse(ActionEvent event) {
-        SortingList.add(new Course(selectedCourseID));
+        SortingList.add(DBConnect.getCourseByID(selectedCourseID));
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("加入課程");
         alert.setHeaderText("確認加入以下課程: ");
         alert.setContentText("加入 " + selectedCourseID);
-
         alert.showAndWait();
     }
 

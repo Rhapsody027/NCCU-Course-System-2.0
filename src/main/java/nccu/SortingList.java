@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 
@@ -22,8 +21,6 @@ public class SortingList {
 
     public static TableView<Course> setDnD(TableView<Course> sortingTable) {
         try {
-            // * cause weird illegalArgument error
-
             sortingTable.setRowFactory(table -> {
                 TableRow<Course> row = new TableRow<>();
 

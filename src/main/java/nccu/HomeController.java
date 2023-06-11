@@ -6,13 +6,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -283,10 +283,16 @@ public class HomeController implements Initializable {
         comment_list = Comment.updateMessageList(selectedCourseID, comment_list);
     }
 
+    // add course to sortingList
     @FXML
     public void addCourse(ActionEvent event) {
         SortingList.add(new Course(selectedCourseID));
-        System.out.println("add");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("加入課程");
+        alert.setHeaderText("確認加入以下課程: ");
+        alert.setContentText("加入 " + selectedCourseID);
+
+        alert.showAndWait();
     }
 
     // TODO: how to identify time session: String? int? another property?

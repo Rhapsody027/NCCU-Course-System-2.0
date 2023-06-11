@@ -1,29 +1,11 @@
 package nccu;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 public class Course {
     int sweet, cool;
     String id, name, pro, time, att;
 
-    // from stack-overflow
-    private final StringProperty courseName = new SimpleStringProperty(this, "name");
-
     public Course(String name) {
         this.name = name;
-    }
-
-    public final StringProperty courseNameProperty() {
-        return this.courseName;
-    }
-
-    public final String getCourseName() {
-        return this.courseNameProperty().get();
-    }
-
-    public final void setCourseName(final String courseName) {
-        this.courseNameProperty().set(courseName);
     }
 
     // original

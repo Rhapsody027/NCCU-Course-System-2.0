@@ -41,9 +41,6 @@ public class SortingController implements Initializable {
     private TableColumn<Course, String> pro;
 
     @FXML
-    private TableView<Course> search_table;
-
-    @FXML
     private TableColumn<Course, Integer> sweet;
 
     @FXML
@@ -62,16 +59,8 @@ public class SortingController implements Initializable {
         cool.setCellValueFactory(new PropertyValueFactory<Course, Integer>("cool"));
         att.setCellValueFactory(new PropertyValueFactory<Course, String>("att"));
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
-        try {
-            Parent root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        HomeController homeController = loader.getController();
-
         // setup DnD table
-        sortingTable.setItems(homeController.getCourseSelect());
+        sortingTable.setItems(SortingList.getList());
 
         sortingTable.setRowFactory(table -> {
             TableRow<Course> row = new TableRow<>();

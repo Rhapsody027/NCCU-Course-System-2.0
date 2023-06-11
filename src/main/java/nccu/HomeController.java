@@ -97,13 +97,11 @@ public class HomeController implements Initializable {
     private CheckBox check_exclude;
 
     private ObservableList<Course> search_list;
-    private ObservableList<Course> select_list = FXCollections.observableArrayList();;
     private FilteredList<Course> filteredList;
     private SortedList<Course> sortedList;
 
     // global var for the course id be double clicked in search table
     private String selectedCourseID;
-    private String selectCourseName;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -195,7 +193,8 @@ public class HomeController implements Initializable {
 
         // * need to add a tag for course type, such as "必修", "人文通識" etc.
         if (box_type.getValue() != null) {
-            String[] alt_way = { "國文", "英文", "體育", "學 ", "管理", "入門" };
+            String[] alt_way = { "國文", "英文", "體育",
+                    "經濟", "投資", "統計", "管理", "入門" };
             typePredicate = Course -> {
                 if (box_type.getValue() == "通識") {
                     boolean flag = true;
@@ -268,7 +267,6 @@ public class HomeController implements Initializable {
         int index = search_table.getSelectionModel().getSelectedIndex();
 
         if (index > -1 && event.getClickCount() == 2) {
-            selectCourseName = name.getCellData(index).toString();
             selectedCourseID = id.getCellData(index).toString().strip();
 
             // first col has a strange '?'
@@ -286,8 +284,8 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    void addCourse(ActionEvent event) {
-        select_list.add(new Course("hihi"));
+    public void addCourse(ActionEvent event) {
+        SortingList.add(new Course(selectedCourseID));
         System.out.println("add");
     }
 
@@ -320,10 +318,4 @@ public class HomeController implements Initializable {
         search_table.setItems(sortedList);
     }
 
-    public ObservableList<Course> getCourseSelect() {
-        System.out.println("send data!");
-        System.out.println(select_list.toString());
-        select_list.add(new Course("hihi"));
-        return select_list;
-    }
 }

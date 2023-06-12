@@ -2,16 +2,15 @@ package nccu;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -71,44 +70,34 @@ public class WishListController implements Initializable {
     }
 
     public void setupColorGrid() {
-        int NUM_ROWS = 7;
-        int NUM_COLS = 5;
         double recWidth = 75;
         double recHeight = 90.5;
 
-        for (int time = 1; time <= NUM_ROWS; time++) {
-            for (int day = 1; day <= NUM_COLS; day++) {
+        // day for col, time for row
+        for (Course course : wishList) {
+            int day = TimeFormater.getDay(course.getTime());
+            ArrayList<Integer> time = TimeFormater.getSession(course.getTime());
 
+            for (int t : time) {
                 Rectangle rect = new Rectangle(recWidth, recHeight);
-                rect.setFill(getColorForCell(day, time));
+                rect.setFill(Color.SKYBLUE);
                 rect.setStroke(Color.SKYBLUE);
 
-                // // add text to rect
-                // StackPane stack = new StackPane();
-                // Text txt = new Text("test");
-                // stack.getChildren().addAll(rect, txt);
+                // add text to rect
+                StackPane stack = new StackPane();
+                Text txt = new Text(course.getName());
+                if (course.getName().length() > 3) {
+                    txt = new Text(course.getName().substring(0, 2) + "...");
+                } else {
+                    txt = new Text(course.getName());
+                }
+                stack.getChildren().addAll(rect, txt);
 
-                // turn time into grid index
-                paintable_grid.add(rect, day - 1, time - 1);
+                // * time - 8 is becuz the diff between index and actual time
+                // * hence, need to find a way to store time
+                paintable_grid.add(stack, day - 1, t - 8 - 1);
             }
         }
-    }
-
-    private Color getColorForCell(int day, int time) {
-
-        for (Course course : wishList) {
-            String courseTime = course.getTime();
-
-            // * time + 8 is becuz the diff between index and actual time
-            // * hence, need to find a way to store time
-            if (day == TimeFormater.getDay(courseTime) &&
-                    TimeFormater.getSession(courseTime).contains(time + 8)) {
-                return Color.SKYBLUE;
-            }
-        }
-
-        return Color.WHITE;
-
     }
 
     @FXML

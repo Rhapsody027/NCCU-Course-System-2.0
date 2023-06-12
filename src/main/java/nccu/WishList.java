@@ -8,6 +8,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 
+// * upload to database
 public class WishList {
     private static ObservableList<Course> wishList = FXCollections.observableArrayList();
 

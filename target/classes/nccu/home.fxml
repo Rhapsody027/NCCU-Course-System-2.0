@@ -7,7 +7,6 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -35,12 +34,12 @@
                   <Font size="20.0" />
                </font></TextField>
             <ChoiceBox id="select_type" fx:id="box_type" focusTraversable="false" layoutX="230.0" layoutY="121.0" prefHeight="38.0" prefWidth="95.0" />
-            <Button id="btn_add" fx:id="btn_addCourse" layoutX="1056.0" layoutY="255.0" mnemonicParsing="false" onAction="#addCourse" prefHeight="40.0" prefWidth="33.0" text="add">
+            <Button id="btn_add" fx:id="btn_addCourse" layoutX="1069.0" layoutY="307.0" mnemonicParsing="false" onAction="#addCourse" prefHeight="46.0" prefWidth="41.0">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button id="btn_submit" fx:id="btn_post" layoutX="1036.0" layoutY="522.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="82.0" text="post">
+            <Button id="btn_submit" fx:id="btn_post" layoutX="1067.0" layoutY="589.0" mnemonicParsing="false" onAction="#postMessage" prefHeight="46.0" prefWidth="42.0">
                <font>
                   <Font size="17.0" />
                </font>
@@ -56,7 +55,7 @@
                </font>
             </RadioButton>
             <ChoiceBox id="select_day" fx:id="box_time" focusTraversable="false" layoutX="116.0" layoutY="121.0" prefHeight="38.0" prefWidth="95.0" />
-            <Button id="btn_check" fx:id="btn_sorting" layoutX="1056.0" layoutY="128.0" mnemonicParsing="false" onAction="#switchStage" prefHeight="38.0" prefWidth="30.0" text="check">
+            <Button id="btn_check" fx:id="btn_sorting" layoutX="1068.0" layoutY="70.0" mnemonicParsing="false" onAction="#switchStage" prefHeight="46.0" prefWidth="42.0">
                <font>
                   <Font size="20.0" />
                </font>
@@ -73,15 +72,24 @@
                   <TableColumn fx:id="id" minWidth="0.0" prefWidth="0.0" text="代碼" />
               </columns>
             </TableView>
-            <WebView fx:id="webView" layoutX="518.0" layoutY="70.0" prefHeight="294.0" prefWidth="526.0" style="-fx-zoom: 0.9;" />
+            <WebView fx:id="webView" layoutX="525.0" layoutY="70.0" prefHeight="294.0" prefWidth="536.0" style="-fx-zoom: 0.9;" />
             <CheckBox fx:id="check_exclude" focusTraversable="false" layoutX="347.0" layoutY="127.0" mnemonicParsing="false" onAction="#getChoiceFilter" prefHeight="30.0" prefWidth="66.0" text="排除" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
                </font>
             </CheckBox>
-            <ListView fx:id="comment_list" layoutX="532.0" layoutY="453.0" prefHeight="138.0" prefWidth="496.0" />
-            <TextArea fx:id="comment_txt" layoutX="532.0" layoutY="603.0" prefHeight="40.0" prefWidth="496.0" promptText="Type here..." style="-fx-alignment: center;" />
-            <Pane layoutX="1030.0" layoutY="69.39999999999998" prefHeight="294.0" prefWidth="18.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="301.0" />
+            <ListView fx:id="comment_list" fixedCellSize="30.0" layoutX="532.0" layoutY="453.0" prefHeight="138.0" prefWidth="515.0" />
+            <Pane layoutX="1044.0" layoutY="69.39999999999998" prefHeight="294.0" prefWidth="17.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="301.0" />
+            <TextField fx:id="comment_txt" layoutX="532.0" layoutY="603.0" prefHeight="38.0" prefWidth="515.0" promptText="Type here...">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <Button id="btn_submit" fx:id="btn_pop" layoutX="1070.0" layoutY="452.0" mnemonicParsing="false" onAction="#popoutWindow" prefHeight="46.0" prefWidth="42.0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
       </children>
     </AnchorPane>
   </children>

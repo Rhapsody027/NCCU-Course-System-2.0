@@ -327,6 +327,23 @@ public class HomeController implements Initializable {
 
     @FXML
     public void switchStage(ActionEvent event) {
+        // try {
+        // Parent root = FXMLLoader.load(getClass().getResource("wishList.fxml"));
+        // Scene scene = btn_sorting.getScene();
+
+        // root.translateXProperty().set(scene.getWidth());
+        // anchorPane.getChildren().add(root);
+
+        // Timeline timeline = new Timeline();
+        // KeyValue kv = new KeyValue(root.translateXProperty(), 0,
+        // Interpolator.EASE_IN);
+        // KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
+        // timeline.getKeyFrames().add(kf);
+        // timeline.play();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+
         try {
             App.setRoot("wishList");
         } catch (IOException e) {

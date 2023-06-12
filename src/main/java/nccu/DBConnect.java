@@ -81,4 +81,19 @@ public class DBConnect {
         }
 
     }
+
+    public static void saveWishList(String id, String name, String time, String pro) {
+        try (Connection connection = DBConnect.connect();
+                PreparedStatement statement = connection
+                        .prepareStatement("INSERT INTO wishList " +
+                                "(id, name, time, pro) VALUES (?, ?, ?, ?)")) {
+            statement.setString(1, id);
+            statement.setString(2, name);
+            statement.setString(3, time);
+            statement.setString(4, pro);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

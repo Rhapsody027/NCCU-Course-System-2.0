@@ -3,12 +3,14 @@ package nccu;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -50,8 +52,12 @@ public class WishListController implements Initializable {
 
     @FXML
     private Button btn_dele;
+
     @FXML
     private Button btn_link;
+
+    @FXML
+    private Button btn_save;
 
     ObservableList<Course> wishList = WishList.getWishList();
 
@@ -96,11 +102,13 @@ public class WishListController implements Initializable {
                 // add text to rect
                 StackPane stack = new StackPane();
                 Text txt = new Text(course.getName());
+
                 if (course.getName().length() > 3) {
                     txt = new Text(course.getName().substring(0, 2) + "...");
                 } else {
                     txt = new Text(course.getName());
                 }
+
                 stack.getChildren().addAll(rect, txt);
 
                 // * time - 8 is becuz the diff between index and actual time
@@ -121,9 +129,27 @@ public class WishListController implements Initializable {
 
     @FXML
     public void delete(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("確認刪除");
+        alert.setHeaderText("確認移除課程?");
+        alert.showAndWait();
+
         Course selectedCourse = wishTable.getSelectionModel().getSelectedItem();
         if (selectedCourse != null) {
             wishList.remove(selectedCourse);
+        }
+    }
+
+    @FXML
+    public void save(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("確認儲存");
+        alert.setHeaderText("已儲存志願清單!");
+        alert.showAndWait();
+
+        for (Course course : wishList) {
+            DBConnect.saveWishList(course.getId(), course.getName(),
+                    course.getTime(), course.getPro());
         }
     }
 }

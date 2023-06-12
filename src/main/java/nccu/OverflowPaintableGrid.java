@@ -61,10 +61,6 @@ public class OverflowPaintableGrid extends Application {
         }
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     private class Grid extends Pane {
 
         int rows;

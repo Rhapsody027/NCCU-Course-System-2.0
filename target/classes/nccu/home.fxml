@@ -25,43 +25,43 @@
                   <Image url="@home.jpg" />
                </image>
             </ImageView>
-            <RadioButton id="select_att" fx:id="rad_att" focusTraversable="false" layoutX="323.0" layoutY="200.0" mnemonicParsing="false" onAction="#getTagFilter" prefHeight="30.0" prefWidth="103.0" text="不用點名">
+            <RadioButton id="select_att" fx:id="rad_att" focusTraversable="false" layoutX="321.0" layoutY="200.0" mnemonicParsing="false" onAction="#getTagFilter" prefHeight="30.0" prefWidth="103.0" text="不用點名">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="17.0" />
                </font></RadioButton>
             <TextField id="search_bar" fx:id="search_text" layoutX="33.0" layoutY="48.0" prefHeight="38.0" prefWidth="330.0">
                <font>
                   <Font size="20.0" />
                </font></TextField>
-            <ChoiceBox id="select_type" fx:id="box_type" focusTraversable="false" layoutX="230.0" layoutY="121.0" prefHeight="38.0" prefWidth="95.0" />
-            <Button id="btn_add" fx:id="btn_addCourse" layoutX="1069.0" layoutY="307.0" mnemonicParsing="false" onAction="#addCourse" prefHeight="46.0" prefWidth="41.0">
+            <ChoiceBox id="select_type" fx:id="box_type" focusTraversable="false" layoutX="231.0" layoutY="126.0" prefHeight="30.0" prefWidth="95.0" />
+            <Button id="btn_add" fx:id="btn_addCourse" layoutX="1067.0" layoutY="307.0" mnemonicParsing="false" onAction="#addCourse" prefHeight="46.0" prefWidth="46.0">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button id="btn_submit" fx:id="btn_post" layoutX="1067.0" layoutY="589.0" mnemonicParsing="false" onAction="#postMessage" prefHeight="46.0" prefWidth="42.0">
+            <Button id="btn_submit" fx:id="btn_post" layoutX="1066.0" layoutY="588.0" mnemonicParsing="false" onAction="#postMessage" prefHeight="46.0" prefWidth="46.0">
                <font>
                   <Font size="17.0" />
                </font>
             </Button>
-            <RadioButton id="tag_sweet" fx:id="rad_sweet" focusTraversable="false" layoutX="32.0" layoutY="200.0" mnemonicParsing="false" onAction="#getTagFilter" prefHeight="30.0" prefWidth="103.0" text="甜到蛀牙">
+            <RadioButton id="tag_sweet" fx:id="rad_sweet" focusTraversable="false" layoutX="30.0" layoutY="200.0" mnemonicParsing="false" onAction="#getTagFilter" prefHeight="30.0" prefWidth="103.0" text="甜到蛀牙">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="17.0" />
                </font>
             </RadioButton>
-            <RadioButton id="tag_cool" fx:id="rad_cool" focusTraversable="false" layoutX="176.0" layoutY="200.0" mnemonicParsing="false" onAction="#getTagFilter" prefHeight="30.0" prefWidth="103.0" text="涼到發抖">
+            <RadioButton id="tag_cool" fx:id="rad_cool" focusTraversable="false" layoutX="175.0" layoutY="200.0" mnemonicParsing="false" onAction="#getTagFilter" prefHeight="30.0" prefWidth="103.0" text="涼到發抖">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="17.0" />
                </font>
             </RadioButton>
-            <ChoiceBox id="select_day" fx:id="box_time" focusTraversable="false" layoutX="116.0" layoutY="121.0" prefHeight="38.0" prefWidth="95.0" />
-            <Button id="btn_check" fx:id="btn_sorting" layoutX="1068.0" layoutY="70.0" mnemonicParsing="false" onAction="#switchStage" prefHeight="46.0" prefWidth="42.0">
+            <ChoiceBox id="select_day" fx:id="box_time" focusTraversable="false" layoutX="119.0" layoutY="125.0" prefHeight="30.0" prefWidth="89.0" />
+            <Button id="btn_check" fx:id="btn_sorting" layoutX="1066.0" layoutY="69.0" mnemonicParsing="false" onAction="#switchStage" prefHeight="46.0" prefWidth="46.0">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <ChoiceBox id="select_day" fx:id="box_day" focusTraversable="false" layoutX="32.0" layoutY="121.0" prefHeight="38.0" prefWidth="66.0" />
-            <TableView fx:id="search_table" fixedCellSize="50.0" layoutX="29.0" layoutY="282.0" onMouseClicked="#tableDoubleClick" prefHeight="355.0" prefWidth="399.0">
+            <ChoiceBox id="select_day" fx:id="box_day" focusTraversable="false" layoutX="37.0" layoutY="126.0" prefHeight="30.0" prefWidth="60.0" />
+            <TableView fx:id="search_table" fixedCellSize="50.0" layoutX="29.0" layoutY="290.0" onMouseClicked="#tableDoubleClick" prefHeight="326.0" prefWidth="399.0">
               <columns>
                 <TableColumn fx:id="name" prefWidth="153.60000228881836" style="-fx-alignment: center-left;" text="課程名稱" />
                 <TableColumn fx:id="time" minWidth="4.800018310546875" prefWidth="79.20002746582031" style="-fx-alignment: center;" text="時間" />
@@ -73,9 +73,9 @@
               </columns>
             </TableView>
             <WebView fx:id="webView" layoutX="525.0" layoutY="70.0" prefHeight="294.0" prefWidth="536.0" style="-fx-zoom: 0.9;" />
-            <CheckBox fx:id="check_exclude" focusTraversable="false" layoutX="347.0" layoutY="127.0" mnemonicParsing="false" onAction="#getChoiceFilter" prefHeight="30.0" prefWidth="66.0" text="排除" textAlignment="CENTER">
+            <CheckBox fx:id="check_exclude" focusTraversable="false" layoutX="350.0" layoutY="126.0" mnemonicParsing="false" onAction="#getChoiceFilter" prefHeight="30.0" prefWidth="66.0" text="排除" textAlignment="CENTER">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="13.5" />
                </font>
             </CheckBox>
             <ListView fx:id="comment_list" fixedCellSize="30.0" layoutX="532.0" layoutY="453.0" prefHeight="138.0" prefWidth="515.0" />
@@ -85,7 +85,7 @@
                   <Font size="15.0" />
                </font>
             </TextField>
-            <Button id="btn_submit" fx:id="btn_pop" layoutX="1070.0" layoutY="452.0" mnemonicParsing="false" onAction="#popoutWindow" prefHeight="46.0" prefWidth="42.0">
+            <Button id="btn_submit" fx:id="btn_pop" layoutX="1068.0" layoutY="452.0" mnemonicParsing="false" onAction="#popoutWindow" prefHeight="46.0" prefWidth="46.0">
                <font>
                   <Font size="17.0" />
                </font>

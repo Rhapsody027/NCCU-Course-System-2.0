@@ -4,10 +4,6 @@ public class Course {
     int sweet, cool;
     String id, name, pro, time, att;
 
-    public Course(String name) {
-        this.name = name;
-    }
-
     // original
     public Course(String name, String time, String pro,
             int sweet, int cool, String att, String id) {

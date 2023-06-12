@@ -12,6 +12,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
@@ -72,7 +73,7 @@
                   <TableColumn fx:id="id" minWidth="0.0" prefWidth="0.0" text="代碼" />
               </columns>
             </TableView>
-            <WebView fx:id="webView" layoutX="518.0" layoutY="70.0" prefHeight="294.0" prefWidth="526.0" />
+            <WebView fx:id="webView" layoutX="518.0" layoutY="70.0" prefHeight="294.0" prefWidth="526.0" style="-fx-zoom: 0.9;" />
             <CheckBox fx:id="check_exclude" focusTraversable="false" layoutX="347.0" layoutY="127.0" mnemonicParsing="false" onAction="#getChoiceFilter" prefHeight="30.0" prefWidth="66.0" text="排除" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
@@ -80,6 +81,7 @@
             </CheckBox>
             <ListView fx:id="comment_list" layoutX="532.0" layoutY="453.0" prefHeight="138.0" prefWidth="496.0" />
             <TextArea fx:id="comment_txt" layoutX="532.0" layoutY="603.0" prefHeight="40.0" prefWidth="496.0" />
+            <Pane layoutX="1030.0" layoutY="69.39999999999998" prefHeight="294.0" prefWidth="18.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="301.0" />
       </children>
     </AnchorPane>
   </children>

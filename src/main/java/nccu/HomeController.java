@@ -3,6 +3,7 @@ package nccu;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -118,7 +119,6 @@ public class HomeController implements Initializable {
         // import database to tableview
         search_list = DBConnect.getCourseData();
         search_table.setItems(search_list);
-        System.out.println("Import!");
 
         // setup search_bar
         filteredList = new FilteredList<>(search_list, b -> true);
@@ -139,6 +139,8 @@ public class HomeController implements Initializable {
 
         // init webEngine
         engine = webView.getEngine();
+        webView.getEngine().setUserStyleSheetLocation(
+                getClass().getResource("style.css").toExternalForm());
 
         // init choiceBoxes
         String[] days = { null, "一", "二", "三", "四", "五" };
@@ -183,10 +185,10 @@ public class HomeController implements Initializable {
             dayPredicate = Course -> true;
         }
 
+        // * need to improve time format
         if (box_time.getValue() != null) {
-            timePredicate = Course -> {
-                return isInTimeSeclect(Course.getTime(), box_time.getValue());
-            };
+            timePredicate = Course -> Course.getTime()
+                    .contains(box_time.getValue().substring(2, 4));
         } else {
             timePredicate = Course -> true;
         }
@@ -275,6 +277,7 @@ public class HomeController implements Initializable {
             }
 
             File f = new File("pages/" + selectedCourseID + ".html");
+            engine.load(null);
             engine.load(f.toURI().toString());
 
             System.out.println(selectedCourseID);
@@ -286,32 +289,23 @@ public class HomeController implements Initializable {
     // add course to sortingList
     @FXML
     public void addCourse(ActionEvent event) {
-        SortingList.add(DBConnect.getCourseByID(selectedCourseID));
+        Course course = DBConnect.getCourseByID(selectedCourseID);
+        if (course != null) {
+            WishList.add(course);
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("加入課程");
-        alert.setHeaderText("確認加入以下課程: ");
-        alert.setContentText("加入 " + selectedCourseID);
-        alert.showAndWait();
-    }
-
-    // TODO: how to identify time session: String? int? another property?
-    // whether the course time is in seleceted session
-    public boolean isInTimeSeclect(String courseTime, String timeSelect) {
-        String[] time_session = {};
-
-        for (String time : time_session) {
-            if (courseTime.contains(time)) {
-                return true;
-            }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("加入課程");
+            alert.setHeaderText("已將課程加入志願清單!");
+            alert.setContentText("\n課程名稱: " + course.getName() +
+                    "\n授課教師: " + course.getPro());
+            alert.showAndWait();
         }
-        return false;
     }
 
     @FXML
     public void switchStage(ActionEvent event) {
         try {
-            App.setRoot("sorting");
+            App.setRoot("wishList");
         } catch (IOException e) {
             e.printStackTrace();
         }

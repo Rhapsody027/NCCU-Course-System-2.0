@@ -8,20 +8,20 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 
-public class SortingList {
-    private static ObservableList<Course> list = FXCollections.observableArrayList();
+public class WishList {
+    private static ObservableList<Course> wishList = FXCollections.observableArrayList();
 
-    public static ObservableList<Course> getSortList() {
-        return list;
+    public static ObservableList<Course> getWishList() {
+        return wishList;
     }
 
     public static void add(Course course) {
-        list.add(course);
+        wishList.add(course);
     }
 
-    public static TableView<Course> setDnD(TableView<Course> sortingTable) {
+    public static TableView<Course> setDnD(TableView<Course> wishTable) {
         try {
-            sortingTable.setRowFactory(table -> {
+            wishTable.setRowFactory(table -> {
                 TableRow<Course> row = new TableRow<>();
 
                 row.setOnDragDetected(event -> {
@@ -51,20 +51,20 @@ public class SortingList {
                     Dragboard dragboard = event.getDragboard();
                     if (dragboard.hasContent(SetDataFormat.getDataFormat())) {
                         int draggedIndex = (Integer) dragboard.getContent(SetDataFormat.getDataFormat());
-                        Course draggedCourse = sortingTable.getItems().remove(draggedIndex);
+                        Course draggedCourse = wishTable.getItems().remove(draggedIndex);
 
                         int dropIndex;
 
                         if (row.isEmpty()) {
-                            dropIndex = sortingTable.getItems().size();
+                            dropIndex = wishTable.getItems().size();
                         } else {
                             dropIndex = row.getIndex();
                         }
 
-                        sortingTable.getItems().add(dropIndex, draggedCourse);
+                        wishTable.getItems().add(dropIndex, draggedCourse);
 
                         event.setDropCompleted(true);
-                        sortingTable.getSelectionModel().select(dropIndex);
+                        wishTable.getSelectionModel().select(dropIndex);
                         event.consume();
                     }
                 });
@@ -75,6 +75,6 @@ public class SortingList {
             System.out.println("catch");
         }
 
-        return sortingTable;
+        return wishTable;
     }
 }

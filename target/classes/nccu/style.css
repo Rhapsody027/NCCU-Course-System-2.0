@@ -10,3 +10,8 @@
 .cell-hover-highlight {
     -fx-background-color: derive(green, 0.9);
 }
+*/
+
+body {
+    overflow-x: hidden;
+}

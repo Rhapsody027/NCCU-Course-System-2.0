@@ -32,13 +32,21 @@ public class Comment extends DBConnect {
 
         try {
             Statement statement = conn.createStatement();
-            ResultSet resultSet = statement
-                    .executeQuery("SELECT * FROM comment WHERE id LIKE '%" + courseID + "%'");
 
-            while (resultSet.next()) {
-                String username = resultSet.getString("username");
-                String content = resultSet.getString("content");
-                String date = resultSet.getString("post_at").substring(0, 10);
+            ResultSet rsCourse = statement
+                    .executeQuery("SELECT * FROM nccu WHERE id LIKE '%" + courseID + "%'");
+            while (rsCourse.next()) {
+                comment_list.getItems()
+                        .add("歡迎來到 " + rsCourse.getString("name") +
+                                " by " + rsCourse.getString("pro") + " 的聊天室: ");
+            }
+
+            ResultSet rsComment = statement
+                    .executeQuery("SELECT * FROM comment WHERE id LIKE '%" + courseID + "%'");
+            while (rsComment.next()) {
+                String username = rsComment.getString("username");
+                String content = rsComment.getString("content");
+                String date = rsComment.getString("post_at").substring(0, 10);
 
                 comment_list.getItems().add(date + "\t" + username + ": " + content);
             }

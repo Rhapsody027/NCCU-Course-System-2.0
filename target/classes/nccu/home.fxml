@@ -80,7 +80,7 @@
                </font>
             </CheckBox>
             <ListView fx:id="comment_list" layoutX="532.0" layoutY="453.0" prefHeight="138.0" prefWidth="496.0" />
-            <TextArea fx:id="comment_txt" layoutX="532.0" layoutY="603.0" prefHeight="40.0" prefWidth="496.0" />
+            <TextArea fx:id="comment_txt" layoutX="532.0" layoutY="603.0" prefHeight="40.0" prefWidth="496.0" promptText="Type here..." style="-fx-alignment: center;" />
             <Pane layoutX="1030.0" layoutY="69.39999999999998" prefHeight="294.0" prefWidth="18.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="301.0" />
       </children>
     </AnchorPane>

@@ -166,6 +166,7 @@ public class HomeController implements Initializable {
 
         if (content != "") {
             Comment.insertMessage(selectedCourseID, content);
+            comment_list = Comment.updateMessageList(selectedCourseID, comment_list);
         }
     }
 

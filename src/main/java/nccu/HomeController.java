@@ -11,7 +11,9 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -20,12 +22,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 public class HomeController implements Initializable {
 
@@ -79,7 +81,7 @@ public class HomeController implements Initializable {
     private ChoiceBox<String> box_type;
 
     @FXML
-    private TextArea comment_txt;
+    private TextField comment_txt;
 
     @FXML
     private ListView<String> comment_list;
@@ -95,6 +97,9 @@ public class HomeController implements Initializable {
 
     @FXML
     private CheckBox check_exclude;
+
+    @FXML
+    private Button btn_pop;
 
     private ObservableList<Course> search_list;
     private FilteredList<Course> filteredList;
@@ -154,11 +159,12 @@ public class HomeController implements Initializable {
         box_type.getItems().addAll(types);
         box_type.setOnAction(this::getChoiceFilter);
 
-        // setup comment function
-        btn_post.setOnAction(event -> postMessage());
+        // hide stuff
+        comment_list.setVisible(false);
+        comment_txt.setVisible(false);
     }
 
-    // actions after press post button
+    // post comment
     @FXML
     public void postMessage() {
         String content = comment_txt.getText();
@@ -167,6 +173,20 @@ public class HomeController implements Initializable {
         if (content != "") {
             Comment.insertMessage(selectedCourseID, content);
             comment_list = Comment.updateMessageList(selectedCourseID, comment_list);
+        }
+    }
+
+    // popout a window of quick comment
+    @FXML
+    public void popoutWindow() {
+        try {
+            Stage stage = new Stage();
+            stage.setTitle("Quick Comment");
+            stage.setScene(new Scene(
+                    FXMLLoader.load(getClass().getResource("popout.fxml"))));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -266,6 +286,9 @@ public class HomeController implements Initializable {
     // load comment list and webView (#0db4be) with selected course id
     @FXML
     public void tableDoubleClick(MouseEvent event) {
+        comment_list.setVisible(true);
+        comment_txt.setVisible(true);
+
         int index = search_table.getSelectionModel().getSelectedIndex();
 
         if (index > -1 && event.getClickCount() == 2) {
@@ -317,5 +340,4 @@ public class HomeController implements Initializable {
         sortedList.comparatorProperty().bind(search_table.comparatorProperty());
         search_table.setItems(sortedList);
     }
-
 }

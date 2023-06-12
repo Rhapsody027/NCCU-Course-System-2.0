@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -47,6 +48,11 @@ public class WishListController implements Initializable {
     @FXML
     private GridPane paintable_grid;
 
+    @FXML
+    private Button btn_dele;
+    @FXML
+    private Button btn_link;
+
     ObservableList<Course> wishList = WishList.getWishList();
 
     @Override
@@ -67,6 +73,10 @@ public class WishListController implements Initializable {
 
         // setup color table
         setupColorGrid();
+
+        // setup btn
+        btn_dele.getStyleClass().add("excluded-button");
+        btn_link.getStyleClass().add("excluded-button");
     }
 
     public void setupColorGrid() {
@@ -108,4 +118,14 @@ public class WishListController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void delete(ActionEvent event) {
+        Course selectedCourse = wishTable.getSelectionModel().getSelectedItem();
+        if (selectedCourse != null) {
+            wishList.remove(selectedCourse);
+        }
+    }
 }
+
+// * refresh table

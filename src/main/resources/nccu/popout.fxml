@@ -31,7 +31,7 @@
       <Pane prefHeight="79.0" prefWidth="306.0" style="-fx-background-color: #7ba3db;" />
       <Label layoutX="93.0" layoutY="25.0" prefHeight="38.0" prefWidth="119.0" text="快捷留言" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font size="29.0" />
+            <Font name="System Bold" size="29.0" />
          </font>
       </Label>
    </children>

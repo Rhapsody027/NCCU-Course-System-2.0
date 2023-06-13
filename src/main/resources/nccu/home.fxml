@@ -18,7 +18,7 @@
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nccu.HomeController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane fx:id="anchorPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
             <ImageView fitHeight="673.0" fitWidth="1181.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -33,7 +33,7 @@
                <font>
                   <Font size="20.0" />
                </font></TextField>
-            <ChoiceBox id="select_type" fx:id="box_type" focusTraversable="false" layoutX="231.0" layoutY="126.0" prefHeight="30.0" prefWidth="95.0" />
+            <ChoiceBox id="select_type" fx:id="box_type" focusTraversable="false" layoutX="234.0" layoutY="126.0" prefHeight="30.0" prefWidth="103.0" />
             <Button id="btn_add" fx:id="btn_addCourse" layoutX="1067.0" layoutY="307.0" mnemonicParsing="false" onAction="#addCourse" prefHeight="46.0" prefWidth="46.0">
                <font>
                   <Font size="20.0" />
@@ -54,7 +54,7 @@
                   <Font name="System Bold" size="17.0" />
                </font>
             </RadioButton>
-            <ChoiceBox id="select_day" fx:id="box_time" focusTraversable="false" layoutX="119.0" layoutY="125.0" prefHeight="30.0" prefWidth="89.0" />
+            <ChoiceBox id="select_day" fx:id="box_time" focusTraversable="false" layoutX="120.0" layoutY="125.0" prefHeight="30.0" prefWidth="87.0" />
             <Button id="btn_check" fx:id="btn_sorting" layoutX="1066.0" layoutY="69.0" mnemonicParsing="false" onAction="#switchStage" prefHeight="46.0" prefWidth="46.0">
                <font>
                   <Font size="20.0" />
